@@ -1,0 +1,331 @@
+#VRML V2.0 utf8 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation 0 0 0 0 
+ position    30 1.5 2
+ description "1" 
+} 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation -0.4 1 0 1
+ position    33 3 3
+ description "2" 
+} 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation -0.4 1 0 1
+ position    15 3 3
+ description "3" 
+} 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation 0 0 0 0
+ position    20 0 20
+ description "4" 
+} 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation 1 0 0 -1.57
+ position    20 20 0
+ description "5" 
+} 
+
+Viewpoint { 
+ fieldOfView 0.8 
+ jump        TRUE 
+ orientation -0.06932473061437029 0.9951824774635503 0.0693247306143686 1.5756254722275078
+ position    40 5 0
+ description "6" 
+} 
+
+DEF BowStraigthPart Transform {
+	translation 29.7 1.5 0
+	children [
+		Shape {
+			geometry Cylinder {        
+				radius 0.025
+				height 0.4				
+			}
+			appearance Appearance {
+				material Material{
+					emissiveColor 0.36 0.14 0.02
+				}
+			}
+		}
+	]
+}
+
+DEF BowUpperArm Transform {
+	translation 29.85 1.945 0
+	rotation 0 0 1 -0.52
+	children [
+		Shape {
+			geometry Cylinder{
+				radius 0.025
+				height 0.6
+			}
+			appearance Appearance {
+				material Material{
+					emissiveColor 0.36 0.14 0.02
+				}
+			}
+		}
+	]
+}
+
+DEF BowLowerArm Transform {
+	translation 29.85 1.055 0
+	rotation 0 0 1 0.52
+	children [
+		Shape {
+			geometry Cylinder{
+				radius 0.025
+				height 0.6
+			}
+			appearance Appearance {
+				material Material{
+					emissiveColor 0.36 0.14 0.02
+				}
+			}
+		}
+	]
+}
+
+DEF StringUpper Transform {
+	translation 30 1.837 0
+	scale 1 1 1
+	children [
+		Shape {
+			geometry Cylinder{
+				radius 0.005
+				height 0.67
+			}
+			appearance Appearance {
+				material Material{
+					emissiveColor 0 0 0
+				}
+			}
+		}
+	]
+}
+
+DEF StringLower Transform {
+	translation 30 1.17 0
+	scale 1 1 1
+	children [
+		Shape {
+			geometry Cylinder{
+				radius 0.005
+				height 0.67
+			}
+			appearance Appearance {
+				material Material{
+					emissiveColor 0 0 0
+				}
+			}
+		}
+	]
+}
+
+DEF Arrow Transform {
+	translation 29 1 2
+	children [
+		DEF Stick Transform{
+			children [
+				Shape {
+					geometry Cylinder{
+						radius 0.005
+						height 0.85
+					}
+					appearance Appearance {
+						material Material{
+							emissiveColor 0 1 0
+						}
+					}
+				}
+			]
+		}
+		DEF ArrowHead Transform{
+			translation 0 0.43 0
+			scale 0.6 1 0.3
+				children [
+					Shape {
+						geometry Cone {
+							bottomRadius 0.03
+							height 0.1
+						}
+						appearance Appearance {
+							material Material {
+								emissiveColor 0.1 0.1 0.1
+							}
+						}
+					}
+				]
+		}
+		DEF Feather Transform{
+			translation 0 -0.4 0
+			scale 0.6 1 0.3
+				children [
+					Shape {
+						geometry Cone {
+							bottomRadius 0.03
+							height 0.1
+						}
+						appearance Appearance {
+							material Material {
+								emissiveColor 1 1 1
+							}
+						}
+					}
+				]
+		}
+		Transform {
+			translation 0 0.02 0
+			children [ USE Feather ]
+		}
+		Transform {
+			translation 0 0.04 0
+			children [ USE Feather ]
+		}
+	]
+}
+
+DEF target Transform{
+	translation 10 0 0
+	children [
+		DEF RoundTarget Transform{
+			translation 0.1 1.5 0
+			rotation 0 0 1 1.57
+			children [
+				Shape {
+					geometry Cylinder{
+						radius 1
+						height 0.1
+					}
+					appearance Appearance{
+						material Material{
+							emissiveColor 0.83 0.84 0.06
+						}
+					}
+				}
+			]
+		}
+		DEF Plank Transform{
+			translation 0.05 0.9 0
+			children[
+				Shape{
+					geometry Box{
+						size 0.05 1.8 0.2
+					}
+					appearance Appearance{
+						material Material{
+							emissiveColor 0.56 0.44 0.02
+						}
+					}
+				}
+			]
+		}
+	]
+}
+
+DEF Floor Transform{
+	translation 20 0 0 
+	children [
+		Shape{
+			geometry Box{
+				size 30 0.1 10
+			}
+			appearance Appearance{
+				material Material{
+					emissiveColor 0 0 1
+				}
+			}
+		}
+	]
+}
+
+DEF Time TimeSensor {
+	loop TRUE
+	cycleInterval 5
+}
+
+DEF BowPosition1 PositionInterpolator {
+	key [ 0, 0.2 0.3, 0.31, 1]
+	keyValue [ 30 1.837 0, 30 1.837 0, 30.2 1.837 0, 30 1.837 0 , 30 1.837 0]
+}
+
+DEF BowPosition2 PositionInterpolator {
+	key [ 0, 0.2, 0.3, 0.31, 1]
+	keyValue [ 30 1.17 0, 30 1.17 0, 30.2 1.17 0, 30 1.17 0, 30 1.17 0]
+}
+
+DEF BowScale1 PositionInterpolator{
+	key [ 0, 0.2 0.3, 0.31, 1]
+	keyValue [1 1 1 , 1 1 1, 1 1.2 1, 1 1 1, 1 1 1]
+}
+
+DEF BowScale2 PositionInterpolator{
+	key [ 0, 0.2, 0.3, 0.31, 1]
+	keyValue [1 1 1 , 1 1 1, 1 1.2 1, 1 1 1, 1 1 1]
+}
+
+DEF BowRotation1 OrientationInterpolator {
+	key[ 0, 0.2, 0.3, 0.31, 1]
+	keyValue[ 0 0 0 0, 0 0 0 0, 0 0 1 0.6, 0 0 0 0, 0 0 0 0]
+}
+
+DEF BowRotation2 OrientationInterpolator {
+	key[ 0, 0.2, 0.3, 0.31, 1]
+	keyValue[ 0 0 0 0, 0 0 0 0, 0 0 1 -0.6, 0 0 0 0, 0 0 0 0]
+}
+
+DEF ArrowPosition PositionInterpolator{
+	key[ 0, 0.1, 0.2, 0.3, 0.35]
+	keyValue[29 1 2, 28.8 1.8 0, 29.58 1.5 0, 30 1.5 0, 10.48 1.5 0]
+}
+
+DEF ArrowRotation OrientationInterpolator {
+	key[ 0, 0.1, 0.2]
+	keyValue[ 0 0 0 0, 0 0 1 0.78 0 0 1 1.57]
+}
+
+ROUTE Time.fraction_changed TO BowScale1.set_fraction
+ROUTE Time.fraction_changed TO BowRotation1.set_fraction
+ROUTE Time.fraction_changed TO BowPosition1.set_fraction
+ROUTE Time.fraction_changed TO BowScale2.set_fraction
+ROUTE Time.fraction_changed TO BowRotation2.set_fraction
+ROUTE Time.fraction_changed TO BowPosition2.set_fraction
+ROUTE Time.fraction_changed TO ArrowPosition.set_fraction
+ROUTE Time.fraction_changed TO ArrowRotation.set_fraction
+
+ROUTE BowScale1.value_changed TO StringUpper.set_scale
+ROUTE BowRotation1.value_changed TO StringUpper.set_rotation
+ROUTE BowPosition1.value_changed TO StringUpper.set_translation
+ROUTE BowScale2.value_changed TO StringLower.set_scale
+ROUTE BowRotation2.value_changed TO StringLower.set_rotation
+ROUTE BowPosition2.value_changed TO StringLower.set_translation
+
+ROUTE ArrowPosition.value_changed TO Arrow.set_translation
+ROUTE ArrowRotation.value_changed TO Arrow.set_rotation
+
+
+
+
+
+
+
+
+
+
+
+
